@@ -2,10 +2,10 @@ import { Box, Center, Flex, Spinner } from "@chakra-ui/react";
 import ProfileCard from "../components/profile/ProfileCard";
 import ScreenLogo from "../components/ScreenLogo";
 import ScreenWrapper from "../components/ScreenWrapper";
-import { useGetStudentQuery } from "../redux/api";
+import { useGetUserQuery } from "../redux/api";
 
 const ProfileScreen = () => {
-  const student = useGetStudentQuery();
+  const user = useGetUserQuery();
 
   return (
     <ScreenWrapper theme="profile">
@@ -13,28 +13,25 @@ const ProfileScreen = () => {
         <Box>
           <ScreenLogo theme="profile" />
         </Box>
-        {student.currentData ? (
+        {user.currentData ? (
           <>
             <Flex w="full" alignContent="start" flexWrap="wrap">
-              <ProfileCard
-                title={"Navn"}
-                description={student.currentData.name}
-              />
+              <ProfileCard title={"Navn"} description={user.currentData.name} />
               <ProfileCard
                 title={"Klasse"}
-                description={student.currentData.class}
+                description={user.currentData.class}
               />
               <ProfileCard
                 title={"Skole"}
-                description={student.currentData.school}
+                description={user.currentData.school}
               />
               <ProfileCard
                 title={"Job"}
-                description={student.currentData.jobTitle ?? "Ikke ansat"}
+                description={user.currentData.jobTitle ?? "Ikke ansat"}
               />
             </Flex>
           </>
-        ) : student.isLoading ? (
+        ) : user.isLoading ? (
           <Center>
             <Spinner color="white" size="xl" />
           </Center>

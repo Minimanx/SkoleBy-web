@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom";
 import { Icon } from "@iconify-icon/react";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/sessionSlice";
-import { useGetStudentQuery } from "../redux/api";
+import { useGetUserQuery } from "../redux/api";
 
 const Header = () => {
-  const student = useGetStudentQuery();
+  const user = useGetUserQuery();
   const dispatch = useDispatch();
 
   return (
@@ -23,11 +23,11 @@ const Header = () => {
         borderColor="#e7e7e7"
         zIndex="2"
       >
-        <Skeleton isLoaded={!student.isLoading} marginLeft="2">
+        <Skeleton isLoaded={!user.isLoading} marginLeft="2">
           <Flex alignItems="center" p="1" minWidth="120px">
-            {student.currentData && (
+            {user.currentData && (
               <Text>
-                {student.currentData.name} - {student.currentData.school}
+                {user.currentData.name} - {user.currentData.school}
               </Text>
             )}
           </Flex>

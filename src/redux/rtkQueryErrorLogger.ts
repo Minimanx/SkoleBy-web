@@ -14,12 +14,7 @@ export const bindHooksToRTKErrorLogger = (_toast: any) => {
 export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {
-      console.error(
-        "WARNING: Redux async middleware rejected an action - the error is logged to Sentry."
-      );
       if (toast !== null && action.payload.status !== 401) {
-        // captureException(new Error(JSON.stringify(action)))
-
         toast({
           title: "Error",
           description:

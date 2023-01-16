@@ -1,4 +1,4 @@
-export type Student = {
+export type User = {
   name: string;
   class: string;
   school: string;
@@ -6,11 +6,17 @@ export type Student = {
   jobTitle?: string;
 };
 
+export type Student = {
+  id: number;
+  name: string;
+  Transaction: Transaction[];
+};
+
 export type Transaction = {
   id: number;
   title: string;
   amount: number;
-  date: Date;
+  createdAt: Date;
 };
 
 export type Mail = {
@@ -18,7 +24,7 @@ export type Mail = {
   from: string;
   title: string;
   body: string;
-  date: Date;
+  createdAt: Date;
 };
 
 export type Business = {
@@ -35,7 +41,7 @@ export type NewsPost = {
   id: number;
   title: string;
   body: string;
-  date: Date;
+  createdAt: Date;
 };
 
 export type JobListing = {

@@ -2,11 +2,11 @@ import { Box, Center, Flex, Spinner } from "@chakra-ui/react";
 import NewsPostCard from "../components/newspaper/NewsPostCard";
 import ScreenLogo from "../components/ScreenLogo";
 import ScreenWrapper from "../components/ScreenWrapper";
-import { useGetNewsPostsQuery, useGetStudentQuery } from "../redux/api";
+import { useGetNewsPostsQuery, useGetUserQuery } from "../redux/api";
 
 const NewspaperScreen = () => {
   const newsPosts = useGetNewsPostsQuery();
-  const student = useGetStudentQuery();
+  const user = useGetUserQuery();
 
   return (
     <ScreenWrapper theme="newspaper">
@@ -14,7 +14,7 @@ const NewspaperScreen = () => {
         <Box>
           <ScreenLogo theme="newspaper" />
         </Box>
-        {student.currentData && newsPosts.currentData ? (
+        {user.currentData && newsPosts.currentData ? (
           <>
             <Flex w="full" justifyContent="start" flexWrap="wrap">
               {newsPosts.currentData.map((i, index) => {
@@ -22,7 +22,7 @@ const NewspaperScreen = () => {
               })}
             </Flex>
           </>
-        ) : student.isLoading || newsPosts.isLoading ? (
+        ) : user.isLoading || newsPosts.isLoading ? (
           <Center>
             <Spinner color="white" size="xl" />
           </Center>

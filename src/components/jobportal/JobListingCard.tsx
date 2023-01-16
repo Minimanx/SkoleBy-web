@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   Flex,
@@ -12,15 +11,13 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
-  Image,
   Stack,
   CardBody,
   Heading,
   CardFooter,
   Textarea,
 } from "@chakra-ui/react";
-import { Business, JobListing } from "../../types";
-import moment from "moment";
+import { JobListing } from "../../types";
 import { themes } from "../../screens/ScreenThemes";
 import { Icon } from "@iconify-icon/react";
 import { useState } from "react";
@@ -53,6 +50,7 @@ const JobListingCard = ({
         variant="elevated"
         color="white"
         backgroundColor={theme.primaryColor}
+        marginBottom="5"
       >
         <Stack>
           <CardBody paddingBottom="1">

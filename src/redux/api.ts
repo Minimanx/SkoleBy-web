@@ -9,8 +9,9 @@ import {
   JobListing,
   Mail,
   NewsPost,
-  Student,
+  User,
   Transaction,
+  Student,
 } from "../types";
 
 const mutex = new Mutex();
@@ -42,9 +43,16 @@ const baseQueryWithReauth: (baseQuery: BaseQueryType) => BaseQueryType =
             "auth/refresh",
             api,
             extraOptions
-          )) as { data: { token: string; id: number } };
+          )) as {
+            data: { token: string; id: number; role: "admin" | "student" };
+          };
           if (refreshResult.data) {
-            api.dispatch(login({ accessToken: refreshResult.data.token }));
+            api.dispatch(
+              login({
+                accessToken: refreshResult.data.token,
+                role: refreshResult.data.role,
+              })
+            );
             result = await baseQuery(args, api, extraOptions);
           } else {
             api.dispatch(logout());
@@ -63,10 +71,12 @@ const baseQueryWithReauth: (baseQuery: BaseQueryType) => BaseQueryType =
 export const api = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithReauth(baseQuery),
+  tagTypes: ["Student"],
   endpoints: (builder) => ({
     login: builder.mutation<
       {
         id: number;
+        role: "admin" | "student";
         token: string;
       },
       { email: string; password: string }
@@ -77,11 +87,18 @@ export const api = createApi({
         body,
       }),
     }),
-    getStudent: builder.query<Student, void>({
+    getUser: builder.query<User, void>({
       query: () => ({
         url: `/user`,
         method: "GET",
       }),
+    }),
+    getStudents: builder.query<Student[], void>({
+      query: () => ({
+        url: `/user/students`,
+        method: "GET",
+      }),
+      providesTags: ["Student"],
     }),
     getTransactions: builder.query<Transaction[], void>({
       query: () => ({
@@ -95,7 +112,7 @@ export const api = createApi({
         method: "GET",
       }),
     }),
-    getBussinesses: builder.query<Business[], void>({
+    getBusinesses: builder.query<Business[], void>({
       query: () => ({
         url: `/business`,
         method: "GET",
@@ -113,6 +130,61 @@ export const api = createApi({
         method: "GET",
       }),
     }),
+    postTransaction: builder.mutation<
+      Transaction,
+      { title: string; amount: number; userId: number }
+    >({
+      query: (body) => ({
+        url: "/bank/transaction",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Student"],
+    }),
+    postBusiness: builder.mutation<
+      Business,
+      {
+        title: string;
+        description: string;
+        opensAt: string;
+        closesAt: string;
+        location: string;
+        icon: string;
+      }
+    >({
+      query: (body) => ({
+        url: "/business",
+        method: "POST",
+        body,
+      }),
+    }),
+    postNewsPost: builder.mutation<
+      NewsPost,
+      {
+        title: string;
+        body: string;
+      }
+    >({
+      query: (body) => ({
+        url: "/newspaper",
+        method: "POST",
+        body,
+      }),
+    }),
+    postJobListing: builder.mutation<
+      JobListing,
+      {
+        title: string;
+        body: string;
+        businessId: number;
+      }
+    >({
+      query: (body) => ({
+        url: "/job",
+        method: "POST",
+        body,
+      }),
+    }),
     postJobApplication: builder.mutation<
       JobApplication,
       { body: string; jobListingId: number }
@@ -128,11 +200,16 @@ export const api = createApi({
 
 export const {
   useLoginMutation,
-  useGetStudentQuery,
+  useGetUserQuery,
+  useGetStudentsQuery,
   useGetTransactionsQuery,
   useGetMailsQuery,
-  useGetBussinessesQuery,
+  useGetBusinessesQuery,
   useGetNewsPostsQuery,
   useGetJobListingsQuery,
+  usePostTransactionMutation,
+  usePostBusinessMutation,
+  usePostNewsPostMutation,
+  usePostJobListingMutation,
   usePostJobApplicationMutation,
 } = api;

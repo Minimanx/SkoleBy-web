@@ -10,6 +10,7 @@ import ExploreScreen from "./screens/ExploreScreen";
 import NewspaperScreen from "./screens/NewspaperScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import Header from "./containers/Header";
+import AdminDashboardScreen from "./screens/AdminDashboardScreen";
 
 export const AuthLayoutRoute = () => {
   const session = useSelector((state: RootState) => state.session);
@@ -23,9 +24,21 @@ export const AuthLayoutRoute = () => {
 
 export const Dashboard = () => {
   const session = useSelector((state: RootState) => state.session);
+  console.log(session);
 
   if (!session.accessToken) {
     return <Navigate to="/" replace />;
+  }
+
+  if (session.role === "admin") {
+    return (
+      <Routes>
+        <Route element={<Header />}>
+          <Route index element={<AdminDashboardScreen />} />
+          <Route path="*" element={<Navigate replace to="/" />} />
+        </Route>
+      </Routes>
+    );
   }
 
   return (

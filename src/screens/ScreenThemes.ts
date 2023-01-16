@@ -20,7 +20,7 @@ export const themes = {
     titleText: "Job portal",
     icon: "mdi:briefcase-account-outline",
     primaryColor: "#298371",
-    primaryHoverColor: "#bd4646",
+    primaryHoverColor: "#226231",
     primaryGradient: "linear(to-tr, #16B0BA, #1CA76D)",
   },
   explore: {

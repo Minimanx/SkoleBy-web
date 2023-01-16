@@ -1,31 +1,17 @@
 import {
   Box,
-  Button,
   Card,
   Flex,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Text,
-  useDisclosure,
-  Image,
   Stack,
   CardBody,
   Heading,
   CardFooter,
-  Textarea,
   CardHeader,
 } from "@chakra-ui/react";
-import { Business, JobListing, NewsPost } from "../../types";
+import { NewsPost } from "../../types";
 import moment from "moment";
 import { themes } from "../../screens/ScreenThemes";
-import { Icon } from "@iconify-icon/react";
-import { useState } from "react";
-import { usePostJobApplicationMutation } from "../../redux/api";
 import LineBreakText from "../common/LineBreakText";
 
 const NewsPostCard = ({
@@ -58,8 +44,8 @@ const NewsPostCard = ({
           <CardFooter fontWeight="bold">
             <Flex justifyContent="flex-end" w="full">
               <Text fontSize="14px">
-                {moment(newsPost.date)
-                  .format("hh:mm - DDD MMM YYYY")
+                {moment(newsPost.createdAt)
+                  .format("hh:mm - DD/MM YYYY")
                   .toString()}
               </Text>
             </Flex>

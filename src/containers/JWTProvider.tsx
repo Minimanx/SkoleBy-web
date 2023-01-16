@@ -11,11 +11,13 @@ const JWTProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const accessToken = window.localStorage.getItem("accessToken");
+    const role = window.localStorage.getItem("role") as "admin" | "student";
 
-    if (accessToken) {
+    if (accessToken && role) {
       dispatch(
         login({
           accessToken,
+          role,
         })
       );
     } else {

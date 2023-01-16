@@ -5,7 +5,6 @@ import {
   Flex,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -19,7 +18,6 @@ import {
   CardFooter,
 } from "@chakra-ui/react";
 import { Business } from "../../types";
-import moment from "moment";
 import { themes } from "../../screens/ScreenThemes";
 import { Icon } from "@iconify-icon/react";
 import LineBreakText from "../common/LineBreakText";

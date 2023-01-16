@@ -49,8 +49,7 @@ const LoginScreen = () => {
     })
       .unwrap()
       .then((res) => {
-        console.log(res);
-        dispatch(login({ accessToken: res.token }));
+        dispatch(login({ accessToken: res.token, role: res.role }));
       });
   };
 

@@ -15,7 +15,7 @@ const TransactionRow = ({
       justifyContent="space-between"
       fontSize={{ base: "18px", md: "24px" }}
       p="3"
-      backgroundColor={index % 2 === 0 ? "#1f3ebf" : "#2943AE"}
+      backgroundColor={index % 2 === 0 ? "#1f3ebf" : "#3c55bf"}
       alignItems="center"
       borderRadius="10px"
       marginBottom="2"
@@ -27,8 +27,10 @@ const TransactionRow = ({
           fontSize={{ base: "14px", sm: "16px", md: "18px" }}
           flexDirection="column"
         >
-          <Text>{moment(transaction.date).format("DD MMM").toString()}</Text>
-          <Text>{moment(transaction.date).format("YYYY").toString()}</Text>
+          <Text>
+            {moment(transaction.createdAt).format("DD MMM").toString()}
+          </Text>
+          <Text>{moment(transaction.createdAt).format("YYYY").toString()}</Text>
         </Flex>
         <Box>{transaction.title}</Box>
       </Flex>

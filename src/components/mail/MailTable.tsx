@@ -1,6 +1,4 @@
-import { Box, Container, Flex, Text } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import { Icon } from "@iconify-icon/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { themes } from "../../screens/ScreenThemes";
 

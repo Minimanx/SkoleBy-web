@@ -48,8 +48,8 @@ const MailRow = ({ mail, index }: { mail: Mail; index: number }) => {
             fontSize={{ base: "14px", sm: "16px", md: "18px" }}
             flexDirection="column"
           >
-            <Text>{moment(mail.date).format("DD MMM").toString()}</Text>
-            <Text>{moment(mail.date).format("YYYY").toString()}</Text>
+            <Text>{moment(mail.createdAt).format("DD MMM").toString()}</Text>
+            <Text>{moment(mail.createdAt).format("YYYY").toString()}</Text>
           </Flex>
           <Box>{mail.title}</Box>
         </Flex>
@@ -69,7 +69,7 @@ const MailRow = ({ mail, index }: { mail: Mail; index: number }) => {
               <Text>Fra: {mail.from}</Text>
               <Text>
                 Modtaget:{" "}
-                {moment(mail.date).format("DD.MM.YYYY - hh:mm").toString()}
+                {moment(mail.createdAt).format("DD.MM.YYYY - hh:mm").toString()}
               </Text>
             </Flex>
             <Box>

@@ -2,11 +2,11 @@ import { Box, Center, Flex, Spinner } from "@chakra-ui/react";
 import JobListingCard from "../components/jobportal/JobListingCard";
 import ScreenLogo from "../components/ScreenLogo";
 import ScreenWrapper from "../components/ScreenWrapper";
-import { useGetJobListingsQuery, useGetStudentQuery } from "../redux/api";
+import { useGetJobListingsQuery, useGetUserQuery } from "../redux/api";
 
 const JobPortalScreen = () => {
   const jobListings = useGetJobListingsQuery();
-  const student = useGetStudentQuery();
+  const user = useGetUserQuery();
 
   return (
     <ScreenWrapper theme="jobportal">
@@ -14,7 +14,7 @@ const JobPortalScreen = () => {
         <Box>
           <ScreenLogo theme="jobportal" />
         </Box>
-        {student.currentData && jobListings.currentData ? (
+        {user.currentData && jobListings.currentData ? (
           <>
             <Flex w="full" justifyContent="start" flexWrap="wrap">
               {jobListings.currentData.map((i, index) => {
@@ -24,7 +24,7 @@ const JobPortalScreen = () => {
               })}
             </Flex>
           </>
-        ) : student.isLoading || jobListings.isLoading ? (
+        ) : user.isLoading || jobListings.isLoading ? (
           <Center>
             <Spinner color="white" size="xl" />
           </Center>

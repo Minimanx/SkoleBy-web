@@ -1,13 +1,13 @@
 import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
 import DashboardButton from "../components/DashboardButton";
-import { useGetStudentQuery } from "../redux/api";
+import { useGetUserQuery } from "../redux/api";
 
 const DashboardScreen = () => {
-  const student = useGetStudentQuery();
+  const user = useGetUserQuery();
 
   return (
     <>
-      {student.currentData ? (
+      {user.currentData ? (
         <Flex
           w="full"
           justifyContent="space-evenly"
@@ -31,7 +31,7 @@ const DashboardScreen = () => {
             marginTop="10"
             marginBottom="10"
           >
-            {student.currentData.funSchoolName}
+            {user.currentData.funSchoolName}
           </Text>
           <Flex
             wrap="wrap"
@@ -47,7 +47,7 @@ const DashboardScreen = () => {
             <DashboardButton theme="profile" />
           </Flex>
         </Flex>
-      ) : student.isLoading ? (
+      ) : user.isLoading ? (
         <Center marginTop="40">
           <Spinner color="black" size="xl" />
         </Center>

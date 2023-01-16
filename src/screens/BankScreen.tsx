@@ -3,11 +3,11 @@ import TransactionRow from "../components/bank/TransactionRow";
 import TransactionTable from "../components/bank/TransactionTable";
 import ScreenLogo from "../components/ScreenLogo";
 import ScreenWrapper from "../components/ScreenWrapper";
-import { useGetStudentQuery, useGetTransactionsQuery } from "../redux/api";
+import { useGetUserQuery, useGetTransactionsQuery } from "../redux/api";
 
 const BankScreen = () => {
   const transactions = useGetTransactionsQuery();
-  const student = useGetStudentQuery();
+  const user = useGetUserQuery();
 
   return (
     <ScreenWrapper theme="bank">
@@ -15,7 +15,7 @@ const BankScreen = () => {
         <Box>
           <ScreenLogo theme="bank" />
         </Box>
-        {student.currentData && transactions.currentData ? (
+        {user.currentData && transactions.currentData ? (
           <>
             <Flex justifyContent="center">
               <Flex
@@ -28,7 +28,7 @@ const BankScreen = () => {
                 <Text
                   textAlign="center"
                   fontWeight="medium"
-                  fontSize={{ base: "18px", sm: "24px", md: "20px" }}
+                  fontSize={{ base: "18px", sm: "20px", md: "24px" }}
                   color="white"
                 >
                   Balance
@@ -55,7 +55,7 @@ const BankScreen = () => {
               </TransactionTable>
             </Flex>
           </>
-        ) : student.isLoading || transactions.isLoading ? (
+        ) : user.isLoading || transactions.isLoading ? (
           <Center>
             <Spinner color="white" size="xl" />
           </Center>
